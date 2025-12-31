@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>10H Awards – Nominados</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-dark: #050b14;
+      --gold: #f5c76a;
+      --cyan: #22ffe1;
+      --blue: #0ff;
+      --card-bg: rgba(20, 40, 60, 0.8);
+    }
+
+    * {
+      box-sizing: border-box;
+      font-family: 'Orbitron', sans-serif;
+    }
+
+    body {
+      margin: 0;
+      background: radial-gradient(circle at top, #0b1f33, var(--bg-dark));
+      color: white;
+      overflow-x: hidden;
+    }
+
+    header {
+      text-align: center;
+      padding: 40px 20px;
+      animation: fadeIn 1.5s ease;
+    }
+
+    header h1 {
+      color: var(--gold);
+      font-size: 3rem;
+      text-shadow: 0 0 20px rgba(245,199,106,0.6);
+    }
+
+    header p {
+      color: var(--cyan);
+      margin-top: 10px;
+      font-size: 1.1rem;
+    }
+
+    .category {
+      margin: 50px auto;
+      max-width: 1100px;
+      padding: 20px;
+      animation: slideUp 1.2s ease;
+    }
+
+    .category h2 {
+      color: var(--gold);
+      border-left: 4px solid var(--cyan);
+      padding-left: 12px;
+      margin-bottom: 25px;
+      text-shadow: 0 0 10px rgba(34,255,225,0.4);
+    }
+
+    .nominees {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 25px;
+    }
+
+    .nominee {
+      background: var(--card-bg);
+      border-radius: 18px;
+      padding: 20px;
+      text-align: center;
+      cursor: pointer;
+      position: relative;
+      transition: all 0.3s ease;
+      box-shadow: 0 0 20px rgba(0,255,255,0.1);
+    }
+
+    .nominee:hover {
+      transform: translateY(-6px) scale(1.02);
+      box-shadow: 0 0 30px rgba(34,255,225,0.4);
+    }
+
+    .nominee img {
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid var(--cyan);
+      margin-bottom: 12px;
+    }
+
+    .nominee span {
+      display: block;
+      margin-top: 8px;
+      font-size: 1rem;
+    }
+
+    .winner {
+      border: 3px solid var(--gold);
+      box-shadow: 0 0 40px rgba(245,199,106,0.9);
+      animation: winnerGlow 1.5s infinite alternate;
+    }
+
+    .winner::after {
+      content: "🏆 GANADOR";
+      position: absolute;
+      top: -15px;
+      right: -10px;
+      background: var(--gold);
+      color: black;
+      padding: 6px 10px;
+      font-size: 0.7rem;
+      border-radius: 10px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 30px;
+      color: #aaa;
+      font-size: 0.8rem;
+    }
+
+    /* Animations */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(40px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes winnerGlow {
+      from { box-shadow: 0 0 20px rgba(245,199,106,0.6); }
+      to { box-shadow: 0 0 60px rgba(245,199,106,1); }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>10H AWARDS</h1>
+  <p>Legends Never Log Out – December 30</p>
+</header>
+
+<!-- CATEGORY -->
+<section class="category">
+  <h2>🛡️ Guardian of the Ring – Mejor Mod</h2>
+  <div class="nominees">
+    <div class="nominee" onclick="selectWinner(this)">
+      <img src="https://via.placeholder.com/150" />
+      <span>ModAlpha</span>
+    </div>
+    <div class="nominee" onclick="selectWinner(this)">
+      <img src="https://via.placeholder.com/150" />
+      <span>ModBeta</span>
+    </div>
+  </div>
+</section>
+
+<section class="category">
+  <h2>⏱️ Spartan Always Online – Top Viewer</h2>
+  <div class="nominees">
+    <div class="nominee" onclick="selectWinner(this)">
+      <img src="https://via.placeholder.com/150" />
+      <span>ViewerOne</span>
+    </div>
+    <div class="nominee" onclick="selectWinner(this)">
+      <img src="https://via.placeholder.com/150" />
+      <span>ViewerTwo</span>
+    </div>
+  </div>
+</section>
+
+<section class="category">
+  <h2>🦅 Eagle Eye Protocol – Mejor Sniper</h2>
+  <div class="nominees">
+    <div class="nominee" onclick="selectWinner(this)">
+      <img src="https://via.placeholder.com/150" />
+      <span>SniperX</span>
+    </div>
+    <div class="nominee" onclick="selectWinner(this)">
+      <img src="https://via.placeholder.com/150" />
+      <span>DeadScope</span>
+    </div>
+  </div>
+</section>
+
+<footer>
+  © 2025 – 10Heros Community Awards
+</footer>
+
+<script>
+  function selectWinner(element) {
+    const container = element.parentElement;
+    container.querySelectorAll('.nominee').forEach(n => n.classList.remove('winner'));
+    element.classList.add('winner');
+
+    // Screen flash effect
+    document.body.animate([
+      { backgroundColor: '#050b14' },
+      { backgroundColor: '#1d3b4f' },
+      { backgroundColor: '#050b14' }
+    ], { duration: 600 });
+  }
+</script>
+
+</body>
+</html>
